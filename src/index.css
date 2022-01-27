@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +10,333 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #232323;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.navbar {
+  height: 50px;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar--container {
+  display: flex;
+  width: 100vw;
+  max-width: 1400px;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.navbar--left{
+  font-family: 'Poppins', sans-serif;
+  color: #C4C4C4;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.navbar--right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ul {
+  width: 400px;
+  display: flex;
+  color: #C4C4C4;
+  padding: auto;
+  list-style: none;
+  justify-content: space-between;
+  font-family: 'Poppins', sans-serif;
+}
+
+li{
+  font-size: 20px;
+  display: block;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+  justify-content: center;
+  cursor: pointer;
+}
+
+li .underline{
+  position: absolute;
+  color: #FFF;
+  height: 5px;
+  top: 33px;
+  left: -5px;
+  right: -5px;
+  background-color: #FFF;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.register{
+  background-color: #5865F2;
+  padding: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #FFF;
+  border-radius: 5px;
+}
+
+.register:hover{
+  background-color: #5854FF;
+}
+
+.hover-show {
+  display: none;
+}
+
+li:hover .hover-show {
+  display: block;
+  background-color: #DDD;
+  opacity: 50%;
+}
+
+.upcoming--event {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.upcoming--container {
+  width: 100vw;
+  max-width: 1440px;
+  display: flex;
+}
+
+.upcoming--poster {
+  height: 400px;
+  min-width: 320px;
+  max-width: 320px;
+  background-color: #DDD;
+}
+
+.upcoming-poster-content {
+  background-color: #232323;
+  padding: 30px;
+  text-align: start;
+}
+
+.upcoming-event-label{
+  background-color:rgba(146, 146, 146, 0.3);
+  color: #FFF;
+  font-family: 'Poppins', sans-serif;
+  padding: 5px;
+  width: 30px;
+  font-size: 15px;
+  padding-right: 90px;
+  border-left: 10px solid white;
+}
+
+.upcoming-event-title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: xx-large;
+  font-family: 'Poppins', sans-serif;
+  color: #FFF;
+}
+
+.upcoming-events {
+  color: #AAA; overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+          line-clamp: 3; 
+  -webkit-box-orient: vertical;
+}
+
+.RSVP {
+  padding: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  font-weight: 700;
+  background-color: #5854FF;
+}
+
+.joinUs {
+  display: flex;
+  justify-content: center;
+}
+
+.joinUs--container {
+  width: 100vw;
+  max-width: 1400px;
+  color: #FFF;
+  font-size: 25px;
+  padding: 20px;
+  background: linear-gradient(125deg, #000 45%, rgba(0,0,0, 0.5) 75%, rgba(0,0,0, 0.1));
+}
+
+.joinUs--discord{
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: space-around;
+}
+
+.discord--logo {
+  width: 30%;
+  border-right: 1px solid #DDD;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.discord--logo img{
+  align-self: center;
+}
+
+.discord--link{
+  width: 70%;
+  color: #ffffff;
+  font-size: x-large;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.discord--link a {
+  background-color: #5854FF;
+  color: #DDD;
+  text-decoration: none;
+  width: fit-content;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}
+
+.followUs-links {
+  display: flex;
+  justify-content: center;
+}
+
+.followUs-links img{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.aboutClub {
+  display: flex;
+  justify-content: center;
+}
+
+.aboutClub--container {
+  width: 100vw;
+  max-width: 1400px;
+  font-family: 'Poppins', sans-serif;
+  color: #FFF;
+  text-align: start;
+  padding: 100px;
+  font-weight: 200;
+}
+
+.aboutClub--container p {
+  opacity: 80%;
+  padding: 20px;
+  font-size: 16px;
+}
+.aboutClub--container h1{
+  font-size: 26px;
+  padding-bottom: 10px;
+}
+
+.coreTeam {
+  display: flex;
+  margin: 20px;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.coreTeam--container {
+  width: 100vw;
+  max-width: 1380px;
+  background-color: #c4c4c407;
+}
+
+.coreTeam--container h1{
+  font-family: 'Poppins', sans-serif;
+  color: #FFF;
+  margin-top: 40px;
+}
+
+.Profiles {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto auto auto auto;
+  justify-content: space-around;
+}
+
+.Profile{
+  background-color: rgba(0,0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 50px;
+  padding-top: 20px;
+  width: fit-content;
+  padding-bottom: 10px;
+  color: #FFF;
+  border-radius: 10px;
+}
+
+.Profile img{
+  border-radius: 100%;  
+  height: 200px;
+  width: 200px;
+  align-self: center;
+}
+
+@media screen and (max-width: 1190px) {
+  .Profiles {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .navbar--right{
+    display: none;
+  }
+
+}
+@media screen and (max-width: 840px) {
+  .aboutClub--container{
+    padding: 15px;
+    margin-top: 80px;
+  }
+}
+@media screen and (max-width: 840px) {
+  .upcoming--container {
+    flex-direction: column;
+  }
+  .upcoming--poster{
+    margin-top: 20px;
+    justify-content: center;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 895px) {
+  .Profiles {
+    grid-template-columns: auto auto;    
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .Profiles {
+    grid-template-columns: auto;    
+    justify-content: center;
+  }
 }
