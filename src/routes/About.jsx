@@ -5,31 +5,17 @@ import linkedinLogo from '../images/in.png';
 
 import '../App.css';
 
+import NavBar from '../components/navbar';
+
 function About() {
     return (
         <div className="About">
-            <div className='navbar'>
-                <div className='navbar--container'>
-                    <div className='navbar--left'>
-                        <img src="https://avatars.githubusercontent.com/u/58457318?s=200&v=4" height={46}
-                            style={{
-                                borderRadius: "100%"
-                            }}
-                        ></img>
-                    </div>
-                    <div className='navbar--right'>
-                        <ul>
-                            <li style={{color: "#FFF"}}>About<div className='underline'></div></li>
-                            <li>Events<div className='underline hover-show'></div></li>
-                            <li>Gallery<div className='underline hover-show'></div></li>
-                            <li className='register'>Register</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <NavBar page="About"/>
             <div className='upcoming--event'>
                 <div className='upcoming--container'>
-                    <div className='upcoming--poster'></div>
+                    <div className='upcoming--poster'>
+                        <img src='https://imgur.com/n4ypT1V.png' alt="poster" width={'100%'}></img>
+                    </div>
                     <div className='upcoming-poster-content'>
                         <div className='upcoming-event-label'>
                             Upcoming{'\n\n'}Event
@@ -43,7 +29,7 @@ function About() {
                         </div>
                         <br />
                         <br />
-                        <a className='RSVP'>RSVP HERE</a>
+                        <a href='https://microsoft-club-sist.github.io/' className='RSVP'>RSVP HERE</a>
                         
                     </div>
                 </div>
@@ -52,20 +38,20 @@ function About() {
                 <div className='joinUs--container'>
                     <div className='joinUs--discord'>
                         <div className='discord--logo'>
-                            <img src={discordLogo} width={'50%'}></img>
+                            <img src={discordLogo} alt='discord' width={'50%'}></img>
                         </div>
                         <div className='discord--link'>
                             <p className='discord-text'>
                                 Join in our Discord Community
                             </p>
-                            <a href='https://bit.ly/mclub-s4' target= {'_blank'} >Click here to join</a>
+                            <a href='https://bit.ly/mclub-s4' target= {'_blank'}  rel='noreferrer'>Click here to join</a>
                         </div>
                     </div>
                     <div className='followUs-links'>
                         Follow us on:
-                        <img src={fLogo} height={'35px'}></img>
-                        <img src={instagramLogo} height={'35px'}></img>
-                        <img src={linkedinLogo} height={'35px'}></img>
+                        <img src={fLogo} alt='Facebook Logo' height={'35px'}></img>
+                        <img src={instagramLogo} alt='Instagram Logo' height={'35px'}></img>
+                        <img src={linkedinLogo} alt='LinkedIn Logo' height={'35px'}></img>
                     </div>
                 </div>
             </div>
@@ -97,9 +83,13 @@ function About() {
                             </div>
                         )
                         }
-                    </div>
-                    
                 </div>
+                    </div>
+            </div>
+            <div className='showAllMember'>
+                <button>
+                    Show All Members
+                </button>
             </div>
         </div>
     );
