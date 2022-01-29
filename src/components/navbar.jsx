@@ -40,19 +40,19 @@ function NavBar(props){
                         <ul>
                             <li>
                                 {(props.page === 'About') && <p style={{color: "#FFF"}}>About</p>}
-                                {(props.page !== 'About') && <p>About</p>}
+                                {(props.page !== 'About') && <a href='/'>About</a>}
                                 {(props.page === 'About') && <div className='underline'></div>}
                                 {(props.page !== 'About') && <div className='underline hover-show'></div>}
                             </li>
                             <li>
                                 {(props.page === 'Events') && <p style={{color: "#FFF"}}>Events</p>}
-                                {(props.page !== 'Events') && <p>Events</p>}
+                                {(props.page !== 'Events') && <a href='/events'>Events</a>}
                                 {(props.page === 'Events') && <div className='underline'></div>}
                                 {(props.page !== 'Events') && <div className='underline hover-show'></div>}
                             </li>
                             <li>
                                 {(props.page === 'Gallery') && <p style={{color: "#FFF"}}>Gallery</p>}
-                                {(props.page !== 'Gallery') && <p>Gallery</p>}
+                                {(props.page !== 'Gallery') && <a href='/gallery'>Gallery</a>}
                                 {(props.page === 'Gallery') && <div className='underline'></div>}
                                 {(props.page !== 'Gallery') && <div className='underline hover-show'></div>}
                             </li>

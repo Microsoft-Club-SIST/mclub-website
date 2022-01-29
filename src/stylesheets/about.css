@@ -59,6 +59,11 @@
     cursor: pointer;
   }
   
+  .navbar--right ul li a {
+    font: inherit;
+    text-decoration: inherit;
+    color: inherit;
+  }
   .navbar--right ul li .underline{
     position: absolute;
     color: #FFF;
