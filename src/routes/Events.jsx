@@ -1,6 +1,7 @@
 import NavBar from '../components/navbar';
 import '../stylesheets/events.css'
-function Gallery() {
+
+function Events() {
     return(
         <div>
             <NavBar page='Events' />
@@ -27,4 +28,4 @@ function Gallery() {
     );
 }
 
-export default Gallery;
+export default Events;
