@@ -1,1 +1,96 @@
-/* Add the styles sheet for events page in this file and remove this comments after adding the code */
+.title {
+    color: #FFF;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.event-buttons {
+    text-align: left;
+    margin-left: 7.1vw;
+}
+
+.grey-button {
+    background-color: rgba(255, 255, 255, 0.17);
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: #ffffff;
+    width: 10vw;
+    height: 2vw;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-left: 1%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2vw;
+    cursor: pointer;
+}
+
+.grey-button:hover {
+    background-color: rgba(255, 255, 255, 0.30);
+}
+
+.grey-button-active {
+    background-color: #c4c4c4;
+    color: #000000;
+}
+
+.event-cards {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-left: 8vw;
+    padding-right: 8vw;
+    text-align: left;
+}
+
+.event-card {
+    background-color: #c4c4c4;
+    width: 85vw;
+    height: 15vw;
+    border-radius: 5px;
+}
+
+.event-card-image {
+    width: 15vw;
+    object-fit: contain;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: inline-block;
+}
+
+.event-card-content {
+    display: inline-block;
+    vertical-align: top;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px;
+    width: 68vw;
+}
+
+.event-card-title {
+    margin-top: 10px;
+    font-size: 1.7rem;
+}
+
+.event-card-title-id {
+    color: #333333;
+}
+
+.event-card-description {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    height: 9vw;
+    max-height: 9vw;
+    max-width: 60vw;
+}
+
+.event-card-registerbutton {
+    background-color: #5865F2;
+    color: rgba(255, 255, 255, 1);
+    width: 8vw;
+    height: 2vw;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2vw;
+    float: right;
+}
