@@ -1,6 +1,7 @@
 import '../App.css';
 import '../stylesheets/about.css'
 import React, { useState } from 'react';
+import {Link} from "react-router-dom"
 
 
 function NavBar(props){
@@ -30,11 +31,13 @@ function NavBar(props){
             <div className='navbar'>
                 <div className='navbar--container'>
                     <div className='navbar--left'>
+                    <Link to="/">
                         <img src="https://avatars.githubusercontent.com/u/58457318?s=200&v=4" height={46} alt='Microsoft Club Sathyabama - Logo'
                             style={{
                                 borderRadius: "100%"
                             }}
                             ></img>
+                    </Link>
                     </div>
                     <div className='navbar--right'>
                         <ul>

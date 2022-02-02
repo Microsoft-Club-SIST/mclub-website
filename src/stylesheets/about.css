@@ -236,10 +236,12 @@
     justify-content: center;
   }
   
-  .followUs-links img{
+  .followUs-links a{
     margin-left: 5px;
     margin-right: 5px;
   }
+  
+  .followUs-links a:last-child{margin:0;}
   
   .aboutClub {
     display: flex;

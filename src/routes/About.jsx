@@ -2,6 +2,7 @@ import discordLogo from '../images/clyde_blurple.png';
 import fLogo from '../images/f_logo.png';
 import instagramLogo from '../images/instagram.png';
 import linkedinLogo from '../images/in.png';
+import githublogo from '../images/github.png';
 
 import '../App.css';
 
@@ -49,9 +50,10 @@ function About() {
                     </div>
                     <div className='followUs-links'>
                         Follow us on:
-                        <img src={fLogo} alt='Facebook Logo' height={'35px'}></img>
-                        <img src={instagramLogo} alt='Instagram Logo' height={'35px'}></img>
-                        <img src={linkedinLogo} alt='LinkedIn Logo' height={'35px'}></img>
+                        <a href="https://fb.com/" target="_blank" rel="noreferrer"><img src={fLogo} alt='Facebook Logo' height={'35px'}></img></a>
+                        <a href="https://www.instagram.com/microsoft.sist/" target="_blank" rel="noreferrer"><img src={instagramLogo} alt='Instagram Logo' height={'35px'}></img></a>
+                        <a href="https://www.linkedin.com/company/microsoft-sist/" target="_blank" rel="noreferrer"><img src={linkedinLogo} alt='LinkedIn Logo' height={'35px'}></img></a>
+                        <a href="https://github.com/Microsoft-Club-SIST" target="_blank" rel="noreferrer"><img src={githublogo} alt="Github logo" height={'35px'}></img></a>    
                     </div>
                 </div>
             </div>
