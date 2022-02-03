@@ -3,7 +3,7 @@ import "../stylesheets/events.css";
 
 function Events() {
   return (
-    <div>
+    <div className="poppins">
       <NavBar page="Events" />
       <h1 className="title">Events</h1>
       <div className="event-body">
@@ -17,7 +17,9 @@ function Events() {
             <div className="event-card">
               <img
                 className="event-card-image"
-                src="https://placekitten.com/500/500"
+                src="https://imgur.com/n4ypT1V.png"
+                width="320px"
+                height="400px"
                 alt="Event"
               />
               <div className="event-card-content">
@@ -27,6 +29,9 @@ function Events() {
                     <span className="event-card-title-id">#0034</span>
                   </h3>
                   <p className="event-card-description">
+                    
+                    <b>Event Description:</b>
+                    <br></br>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Amet eligendi tempora mollitia necessitatibus quaerat
                     corporis nesciunt a exercitationem minima maiores esse,
