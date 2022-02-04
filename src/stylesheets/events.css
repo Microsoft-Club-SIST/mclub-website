@@ -100,6 +100,11 @@
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.event-card-registerbutton:hover {
+  background: linear-gradient(270deg ,  #5854FF,  #5754ffe3);
 }
 
 @media screen and (max-width: 840px) {
