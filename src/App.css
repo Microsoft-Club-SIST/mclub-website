@@ -1,3 +1,21 @@
+body::-webkit-scrollbar {
+  width: 10px;
+  border-left: 1px ridge rgba(221, 221, 221, 0.2);
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(80, 80, 80, 0.377); 
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #DDD; 
+}
+
 .App {
   text-align: center;
 }
