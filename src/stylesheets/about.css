@@ -23,13 +23,16 @@
     padding-left: 20px;
     padding-right: 20px;
   }
-  
-  .navbar--left{
+
+  .navbar--left {
     font-family: 'Poppins', sans-serif;
     color: #C4C4C4;
     display: flex;
+    flex-direction: row;
+  }
+  .navbar--left img{
+    margin: 7px;
     justify-content: center;
-    flex-direction: column;
   }
   
   .navbar--right{
@@ -100,6 +103,9 @@
   
   .navbar--right--mob, .navbar--right-mob--dropdown, .navbar--right-mob--dropdown a {
     display: none;
+  }
+  .club---name{
+    display: flex;
   }
   
   .upcoming--event {
@@ -187,21 +193,21 @@
     background: linear-gradient(125deg, #000 45%, rgba(0,0,0, 0.5) 75%, rgba(0,0,0, 0.1));
   }
   
-  .joinUs--discord{
+  .joinUs--discord {
     display: flex;
     padding-top: 20px;
     padding-bottom: 20px;
     justify-content: space-around;
   }
   
-  .discord--logo {
+  .club--logo {
     width: 30%;
     border-right: 1px solid #DDD;
     display: flex;
     justify-content: center;
     flex-direction: column;
   }
-  .discord--logo img{
+  .club--logo img{  
     align-self: center;
   }
   
@@ -415,10 +421,46 @@
       justify-content: space-around;
     }
   }
-  
+
+  @media screen and (max-width: 713px) {
+    .club---name {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 590px) {
     .Profiles {
       grid-template-columns: auto;    
       justify-content: center;
+    }
+
+    .navbar--container{
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .club---name {
+      display: flex;
+    }
+
+    .joinUs--discord{
+      flex-direction: column;
+    }
+
+    .club--logo {
+      border-right: none;
+      width: 100%;
+    }
+
+    .discord--link{
+      width: auto;
+    }
+
+    .followUs-links {
+      flex-direction: column;
+    }
+
+    .followUs-links-li{
+      margin-top: 15px;
     }
   }

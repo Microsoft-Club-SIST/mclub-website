@@ -1,8 +1,8 @@
-import discordLogo from '../images/clyde_blurple.png';
 import fLogo from '../images/f_logo.png';
 import instagramLogo from '../images/instagram.png';
 import linkedinLogo from '../images/in.png';
 import githublogo from '../images/github.png';
+import clubLogo from '../images/logo.png';
 
 import '../App.css';
 
@@ -38,8 +38,8 @@ function About() {
             <div className='joinUs'>
                 <div className='joinUs--container'>
                     <div className='joinUs--discord'>
-                        <div className='discord--logo'>
-                            <img src={discordLogo} alt='discord' width={'50%'}></img>
+                        <div className='club--logo'>
+                            <img src={clubLogo} alt='discord' width={'50%'} scale="1.3"></img>
                         </div>
                         <div className='discord--link'>
                             <p className='discord-text'>
@@ -50,10 +50,12 @@ function About() {
                     </div>
                     <div className='followUs-links'>
                         Follow us on:
-                        <a href="https://fb.com/" target="_blank" rel="noreferrer"><img src={fLogo} alt='Facebook Logo' height={'35px'}></img></a>
-                        <a href="https://www.instagram.com/microsoft.sist/" target="_blank" rel="noreferrer"><img src={instagramLogo} alt='Instagram Logo' height={'35px'}></img></a>
-                        <a href="https://www.linkedin.com/company/microsoft-sist/" target="_blank" rel="noreferrer"><img src={linkedinLogo} alt='LinkedIn Logo' height={'35px'}></img></a>
-                        <a href="https://github.com/Microsoft-Club-SIST" target="_blank" rel="noreferrer"><img src={githublogo} alt="Github logo" height={'35px'}></img></a>    
+                        <div className='followUs-links-li'>
+                            <a href="https://fb.com/" target="_blank" rel="noreferrer"><img src={fLogo} alt='Facebook Logo' height={'35px'}></img></a>
+                            <a href="https://www.instagram.com/microsoft.sist/" target="_blank" rel="noreferrer"><img src={instagramLogo} alt='Instagram Logo' height={'35px'}></img></a>
+                            <a href="https://www.linkedin.com/company/microsoft-sist/" target="_blank" rel="noreferrer"><img src={linkedinLogo} alt='LinkedIn Logo' height={'35px'}></img></a>
+                            <a href="https://github.com/Microsoft-Club-SIST" target="_blank" rel="noreferrer"><img src={githublogo} alt="Github logo" height={'35px'}></img></a>    
+                        </div>
                     </div>
                 </div>
             </div>
