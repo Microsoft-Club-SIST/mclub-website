@@ -65,14 +65,19 @@ function About() {
                         About Club
                     </h1>
                     <p>
-                        Sunt elit laborum ullamco excepteur. Deserunt ad excepteur tempor id nostrud ex dolor ex cupidatat. Culpa dolor ex duis ipsum commodo dolore incididunt et sit eiusmod nulla nulla. Reprehenderit veniam laboris id officia nulla laborum mollit consectetur ut ut consectetur elit duis.
-                        <br></br>
-                        <br></br>
-                        Ullamco elit enim sunt magna labore dolor. Nisi non do dolor amet veniam do fugiat commodo nisi eu eiusmod velit velit. Lorem deserunt aliqua aliquip ipsum nostrud Lorem sunt quis eu nulla incididunt elit labore. Ipsum ullamco et elit nisi aliqua consequat. Ut consequat ut aute sint proident sunt cillum.
-                        Ullamco elit enim sunt magna labore dolor. Nisi non do dolor amet veniam do fugiat commodo nisi eu eiusmod velit velit. Lorem deserunt aliqua aliquip ipsum nostrud Lorem sunt quis eu nulla incididunt elit labore. Ipsum ullamco et elit nisi aliqua consequat. Ut consequat ut aute sint proident sunt cillum.
-                        <br></br>
-                        <br></br>
-                        Laboris aute proident eu sunt do magna reprehenderit ea nisi. Proident tempor magna commodo reprehenderit dolor duis in id eiusmod adipisicing eiusmod voluptate. Duis sunt elit adipisicing eu cupidatat officia culpa reprehenderit. Do ea laboris reprehenderit amet ea amet culpa nisi et nisi.
+                    Microsoft Club is a community group of Sathyabama Institute of Science and Technology college students that was created with the sole purpose 
+                    of bringing folks with similar interests in technology together where they can begin and master their tech and development skills. 
+                    <br/><br/>
+                    Students from all undergraduate programs with an interest in growing as a community are welcome here. The club is open to everyone in the university who are 
+                    obliged to work and learn together, be it a fresher or a senior. Anyone who wants to brush up their developing abilities and contribute 
+                    their knowledge in upgrading the club are gladly admitted .
+                    <br/><br/>
+                    The club strives to build and enhance the open-sourcing environment and the learning culture. By joining the club, students grow their 
+                    knowledge in a peer-to-peer learning atmosphere and build solutions for local businesses and their community. It serves as a common platform 
+                    for exchange of web, coding, programming and other tech related knowledge.
+                    <br/><br/>
+                    The enthusiasm and determination of each Developer, coders, graphic designers and innovative thinkers is what govern our community. It is 
+                    an initiative taken that will go a long way in maintaining the technical culture of Sathyabama in the years to come.
                     </p>
                 </div>
             </div>
