@@ -59,8 +59,8 @@
 }
 
 .event-card-image {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .event-card-content {
@@ -113,7 +113,7 @@
   } 
   .event-card-image {
     align-self: center;
-    width: 100%;
+    width: calc(100% - 20px);
     height: auto;
     border-bottom-left-radius: 0px;
   }

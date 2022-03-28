@@ -3,34 +3,83 @@ import instagramLogo from '../images/instagram.png';
 import linkedinLogo from '../images/in.png';
 import githublogo from '../images/github.png';
 import clubLogo from '../images/logo.png';
+import { addEvent, getEvent, getMembers } from '../Firebase';
+import React, { useEffect, useState } from "react";
 
 import '../App.css';
 
 import NavBar from '../components/navbar';
 
 function About() {
+    const [responses, setResponses] = useState([{event: "Loading...", date: 0}]);
+    const [members, setMembers] = useState([{event: "Loading...", date: 0}]);
+    const [_date, setDate] = useState(12);
+    const today = new Date();
+    const cardColors=["#FFD700", "#008DD5", "#FF7467", "white", "#c4c4c410", "#050505", "", "", "", "", "", "", "", ""];
+    useEffect(() => {
+            getEvent().then(data => {
+            // addEvent(
+            //     {event: 'Git & Github',
+            //     desc: 'Enim reprehenderit do ut labore ad. Anim aliquip deserunt culpa occaecat.Nulla velit tempor ea sit occaecat quis eiusmod Lorem voluptate pariatur eu consectetur laboris officia. Fugiat culpa tempor elit consectetur reprehenderit tempor exercitation nisi duis elit nostrud quis. Ex in laborum est exercitation. Nulla sint consectetur enim dolor est ut exercitation incididunt. Id amet ut excepteur commodo fugiat culpa sunt laboris proident',
+            //     link: 'https://forms.gle/E25S3J1rDrfuie1g8',
+            //     image: 'https://imgur.com/n4ypT1V.png'
+            // });
+            setResponses(data);
+            formatDate(today);
+        });
+        getMembers().then(data => {
+            setMembers(data);
+        })
+    }, []);
+
+    function formatDate(date) {
+        const d = (date.getDate().toString().length > 1) ? date.getDate().toString() : "0"+date.getDate().toString()
+        const m =  ((date.getMonth()+1).toString().length > 1) ? (date.getMonth()+1).toString() : "0"+(date.getMonth()+1).toString()
+        const y= date.getFullYear().toString()
+        const h = (date.getHours().toString().length > 1) ? date.getHours().toString() : "0"+date.getHours().toString()
+        const mi = (date.getMinutes().toString().length > 1) ? date.getMinutes().toString() : "0"+date.getMinutes().toString()
+        const s = (date.getSeconds().toString().length > 1) ? date.getSeconds().toString() : "0"+date.getSeconds().toString()
+        const da = (y+m+d+h+mi+s)
+        setDate(parseInt(da));
+    }
+
     return (
         <div className="About">
             <NavBar page="About"/>
             <div className='upcoming--event'>
                 <div className='upcoming--container'>
                     <div className='upcoming--poster'>
-                        <img src='https://imgur.com/n4ypT1V.png' alt="poster" width={'100%'}></img>
+                        <img src={responses[0].image} alt="poster" width={'100%'}></img>
                     </div>
                     <div className='upcoming-poster-content'>
-                        <div className='upcoming-event-label'>
-                            Upcoming{'\n\n'}Event
-                        </div>
+                        
+                        {
+                            (_date < responses[0].timestamp) && <div className='upcoming-event-label'>Upcoming{'\n\n'}Event</div>
+                        }
+                        {
+                            (_date > responses[0].timestamp) && <div className='upcoming-event-label'>Past{'\n\n'}Event</div>
+
+                        }
+                    
                         <div className='upcoming-event-title'>
-                            Git & Github
+                            {
+                                responses[0].event
+                            }
                         </div>
                         <div className='upcoming-events'>
-                            Enim reprehenderit do ut labore ad. Anim aliquip
-                            deserunt culpa occaecat.Nulla velit tempor ea sit occaecat quis eiusmod Lorem voluptate pariatur eu consectetur laboris officia. Fugiat culpa tempor elit consectetur reprehenderit tempor exercitation nisi duis elit nostrud quis. Ex in laborum est exercitation. Nulla sint consectetur enim dolor est ut exercitation incididunt. Id amet ut excepteur commodo fugiat culpa sunt laboris proident. Nostrud fugiat commodo eiusmod proident sit proident cillum. Aliqua dolor consequat ipsum officia nulla officia.
+                            {responses[0].desc}
                         </div>
                         <br />
                         <br />
-                        <a href='https://microsoft-club-sist.github.io/' className='RSVP'>RSVP HERE</a>
+                        {
+                            (_date < responses[0].timestamp) && 
+                            <a href={responses[0].link} target="_blank" rel="noreferrer" className='RSVP'>RSVP HERE</a>
+                        }
+                        {
+                            (_date > responses[0].timestamp) &&
+                            <a href={responses[0].link} target="_blank" rel="noreferrer" className='RSVP'>View Recorded Session</a>
+
+                        }
                         
                     </div>
                 </div>
@@ -59,49 +108,60 @@ function About() {
                     </div>
                 </div>
             </div>
-            <div className='aboutClub'>
-                <div className='aboutClub--container'>
-                    <h1>
-                        About Club
-                    </h1>
-                    <p>
-                    Microsoft Club is a community group of Sathyabama Institute of Science and Technology college students that was created with the sole purpose 
-                    of bringing folks with similar interests in technology together where they can begin and master their tech and development skills. 
-                    <br/><br/>
-                    Students from all undergraduate programs with an interest in growing as a community are welcome here. The club is open to everyone in the university who are 
-                    obliged to work and learn together, be it a fresher or a senior. Anyone who wants to brush up their developing abilities and contribute 
-                    their knowledge in upgrading the club are gladly admitted .
-                    <br/><br/>
-                    The club strives to build and enhance the open-sourcing environment and the learning culture. By joining the club, students grow their 
-                    knowledge in a peer-to-peer learning atmosphere and build solutions for local businesses and their community. It serves as a common platform 
-                    for exchange of web, coding, programming and other tech related knowledge.
-                    <br/><br/>
-                    The enthusiasm and determination of each Developer, coders, graphic designers and innovative thinkers is what govern our community. It is 
-                    an initiative taken that will go a long way in maintaining the technical culture of Sathyabama in the years to come.
-                    </p>
-                </div>
-            </div>
+            <ClubInfo />
             <div className='coreTeam'>
                 <div className='coreTeam--container'>
                     <h1>Core Team</h1>
                     <div className='Profiles'>
                         {
-                            [1,2,3,4,5,6,7,8,7,8,9,10].map((_, i) => <div className='Profile'>
-                            <img src="https://www.sarojhospital.com/images/testimonials/dummy-profile.png" alt="profile" srcset="" />
-                                <b>Name</b>Role
+                            members.map((_, i) => <div className='Profile' 
+                            style={{
+                                backgroundColor: cardColors[_.priority-1], 
+                                color: (((_.priority == 1 || _.priority == 3|| _.priority == 4) ? 'black' : 'white'))}}>
+                            <img src={_.photo} style={{objectFit: "cover"}} alt="profile" srcset="" />
+                                <h2 style={{marginTop: "10px", marginBottom: "10px"}}>{_.name}</h2>
+                                <b style={{opacity: "0.8", zIndex: 0}}>{_.role}</b>
+                                <b style={{opacity: "0.6"}}>{_.dept} {_.batch}</b>
                             </div>
                         )
                         }
                 </div>
                     </div>
             </div>
-            <div className='showAllMember'>
-                <button>
-                    Show All Members
-                </button>
-            </div>
+            {
+                // <div className='showAllMember'>
+                //     <button>
+                //         Show All Members
+                //     </button>
+                // </div>
+            }
         </div>
     );
 }
 
+function ClubInfo(){
+    return(
+        <div className='aboutClub'>
+            <div className='aboutClub--container'>
+                <h1>
+                    About Club
+                </h1>
+                <p>
+                Microsoft Club is a community group of Sathyabama Institute of Science and Technology college students that was created with the sole purpose 
+                of bringing folks with similar interests in technology together where they can begin and master their tech and development skills. 
+                Students from all undergraduate programs with an interest in growing as a community are welcome here. The club is open to everyone in the university who are 
+                obliged to work and learn together, be it a fresher or a senior. Anyone who wants to brush up their developing abilities and contribute 
+                their knowledge in upgrading the club are gladly admitted .
+                <br/><br/>
+                The club strives to build and enhance the open-sourcing environment and the learning culture. By joining the club, students grow their 
+                knowledge in a peer-to-peer learning atmosphere and build solutions for local businesses and their community. It serves as a common platform 
+                for exchange of web, coding, programming and other tech related knowledge.
+                <br/><br/>
+                The enthusiasm and determination of each Developer, coders, graphic designers and innovative thinkers is what govern our community. It is 
+                an initiative taken that will go a long way in maintaining the technical culture of Sathyabama in the years to come.
+                </p>
+            </div>
+        </div>  
+    );
+}
 export default About;

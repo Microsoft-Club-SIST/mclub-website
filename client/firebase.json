@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "mclubch",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
