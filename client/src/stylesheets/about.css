@@ -286,6 +286,7 @@
     width: 100vw;
     max-width: 1380px;
     background-color: #c4c4c407;
+    border-radius: 10px;  
   }
   
   .coreTeam--container h1{
@@ -321,6 +322,7 @@
     height: 180px;
     width: 180px;
     align-self: center;
+    border: 10px solid #00000025;
   }
   
   .showAllMember button {

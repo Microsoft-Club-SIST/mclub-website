@@ -1,7 +1,7 @@
 import NavBar from "../components/navbar";
 import "../stylesheets/events.css";
 import React, { useEffect, useState } from "react";
-import { getEvent } from '../Firebase';
+import { getUpEvent } from '../Firebase';
 import { FcCalendar, FcClock } from 'react-icons/fc';
 import clubLogo from '../images/logo.png';
 
@@ -22,7 +22,7 @@ function Events() {
   }
 
   useEffect(() => {
-    getEvent().then(data => {
+    getUpEvent().then(data => {
         setEvents(data);
         formatDate(today);
     });
@@ -34,8 +34,8 @@ function Events() {
       <h1 className="title">Events</h1>
       <div className="event-body">
         <div className="event-buttons">
-          <div className="selected-button" >All Events</div>
-          <div className="grey-button" onClick={()=> window.location="/upcoming-events"}>Upcoming Events</div>
+          <div className="grey-button" onClick={()=> window.location="/events"}>All Events</div>
+          <div className="selected-button" >Upcoming Events</div>
           <div className="grey-button" onClick={()=> window.location="/past-events"}>Past Events</div>
         </div>
         {events.map((_, i) => (
