@@ -8,7 +8,6 @@ import clubLogo from '../images/logo.png';
 function Events() {
   const [events, setEvents] = useState([{event: "Loading...", date: 0, timestamp: "12121234"}]);
   const [_date, setDate] = useState(12);
-  const today = new Date();
   
   function formatDate(date) {
     const d = (date.getDate().toString().length > 1) ? date.getDate().toString() : "0"+date.getDate().toString()
@@ -20,13 +19,14 @@ function Events() {
     const da = (y+m+d+h+mi+s)
     setDate(parseInt(da));
   }
-
+  
   useEffect(() => {
+    const today = new Date();
     getEvent().then(data => {
-        setEvents(data);
-        formatDate(today);
+      formatDate(today);
+      setEvents(data);
     });
-  });
+  }, []);
   
   return (
     <div className="poppins">
@@ -91,7 +91,7 @@ function Events() {
             <h3 className="event-card-title" style={{color: "white", marginTop: "50px"}}>
               Wait for sometime
               <br />
-              We will be coming with more cool stuff again
+              We will be coming up with more cool stuff again
               <br />
               Stay Tuned!
             </h3>

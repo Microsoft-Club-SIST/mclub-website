@@ -26,8 +26,8 @@ function Events() {
         setEvents(data);
         formatDate(today);
     });
-  });
-  
+  }, []);
+
   return (
     <div className="poppins">
       <NavBar page="Events" />
@@ -91,7 +91,7 @@ function Events() {
             <h3 className="event-card-title" style={{color: "white", marginTop: "50px"}}>
               Wait for sometime
               <br />
-              We will be coming with more cool stuff again
+              We will be coming up with more cool stuff again
               <br />
               Stay Tuned!
             </h3>

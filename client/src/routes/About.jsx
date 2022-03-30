@@ -12,18 +12,12 @@ import NavBar from '../components/navbar';
 
 function About() {
     const [responses, setResponses] = useState([{event: "Loading...", date: 0}]);
-    const [members, setMembers] = useState([{event: "Loading...", date: 0}]);
+    const [members, setMembers] = useState([{name: "Loading...", role: ""}]);
     const [_date, setDate] = useState(12);
     const today = new Date();
-    const cardColors=["#FFD700", "#008DD5", "#FF7467", "white", "#c4c4c410", "#050505", "", "", "", "", "", "", "", ""];
+    const cardColors=["#FFD700", "#008DD5", "#FF7467", "white", "#c4c4c410", "#050505"];
     useEffect(() => {
-            getEvent().then(data => {
-            // addEvent(
-            //     {event: 'Git & Github',
-            //     desc: 'Enim reprehenderit do ut labore ad. Anim aliquip deserunt culpa occaecat.Nulla velit tempor ea sit occaecat quis eiusmod Lorem voluptate pariatur eu consectetur laboris officia. Fugiat culpa tempor elit consectetur reprehenderit tempor exercitation nisi duis elit nostrud quis. Ex in laborum est exercitation. Nulla sint consectetur enim dolor est ut exercitation incididunt. Id amet ut excepteur commodo fugiat culpa sunt laboris proident',
-            //     link: 'https://forms.gle/E25S3J1rDrfuie1g8',
-            //     image: 'https://imgur.com/n4ypT1V.png'
-            // });
+        getEvent().then(data => {
             setResponses(data);
             formatDate(today);
         });

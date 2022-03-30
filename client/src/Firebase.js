@@ -52,7 +52,7 @@ export const getUpEvent = async () => {
 }
 
 export const getMembers = async () => {
-  const eventRef = collection(db, 'members')
+  const eventRef = collection(db, 'Members')
   const q = query(eventRef, orderBy("order"));
   const querySnapshot = await getDocs(q);
   const responseList = querySnapshot.docs.map(doc => doc.data());
