@@ -1,0 +1,1 @@
+heroku: cd server && flask run
