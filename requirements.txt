@@ -1,2 +1,4 @@
 imagekitio
 flask
+gunicorn
+flask_limiter

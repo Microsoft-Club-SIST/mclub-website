@@ -1,1 +1,1 @@
-heroku: cd server && flask run
+web: python server/wsgi.py
