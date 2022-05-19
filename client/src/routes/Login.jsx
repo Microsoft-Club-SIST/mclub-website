@@ -35,7 +35,7 @@ function Login() {
             <img src={clubLogo} width="100px" style={{marginTop: 30, marginBottom: 20}} />
             <h1 style={{color: '#FFF', marginTop: 10, marginBottom: 20}}>Login</h1>
             <div>
-                <input ref={username} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#fff', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Username" />  
+                <input ref={username} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Username" />  
             </div>
             <div>
                 <input ref={password}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="password" placeholder="Password" autoComplete="on" />
