@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, setDoc, doc, query, orderBy, where } from 'firebase/firestore/lite';
+import { getAuth } from "firebase/auth";
+
 // import { getAnalytics } from "firebase/analytics";
 
 
@@ -19,11 +21,11 @@ const firebaseConfig = {
 };
 
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 const db = getFirestore();
+const auth = getAuth(app);
 
 export const getEvent = async () => {
     const eventRef = collection(db, 'event')

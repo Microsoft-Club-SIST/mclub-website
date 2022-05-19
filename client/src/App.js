@@ -5,6 +5,8 @@ import EventsUp from './routes/EventsUpcoming';
 import EventsPast from './routes/EventsPast';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+import Dashboard from './routes/Dashboard';
+import Login from './routes/Login';
 
 function App() {
     return ( 
@@ -15,6 +17,8 @@ function App() {
                 <Route exact path = "/events" element = { <Events /> }/>   
                 <Route exact path = "/upcoming-events" element = { <EventsUp /> }/>   
                 <Route exact path = "/past-events" element = { <EventsPast /> }/>   
+                <Route exact path = "/dashboard" element = { <Dashboard /> }/>   
+                <Route exact path = "/login" element = { <Login /> }/>   
             </Routes>
         </div>
     );
