@@ -5,13 +5,12 @@ import React, { useEffect, useState } from 'react';
 
 function Gallery() {
     const [Images, setImages] = useState([]);
-
-
+    
     useEffect(() => {
         console.log(process.env.REACT_APP_ENDPOINT);
-        axios.get(process.env.REACT_APP_ENDPOINT)
+        axios.get(process.env.REACT_APP_ENDPOINT+'/image')
         .then(res => {
-            console.log(res.data)
+            console.log("res", res.data)
             if (res.data.length !== 0){
                 setImages(res.data.reverse())
             }
@@ -28,12 +27,10 @@ function Gallery() {
             <div className='Photos'>
                 <div className='Photos--container'>
                     <div className='Photos--bucket'>
+                        {Images===[] && "Loading...."}
                         {
                             Images.map((_, i) =>
                                 <a href={_.url}>
-                                    {
-                                    //    <iframe src={"https://www.instagram.com/p/"+_+"/embed"} width="400" height="480" frameborder="0" allowtransparency="true"></iframe>
-                                    }
                                     <img src={_.url} alt="profile" srcset="" style={{objectFit: "cover"}} width={'300px'} height={'300px'} />
                                 </a>
                             )

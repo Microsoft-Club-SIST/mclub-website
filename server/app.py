@@ -1,11 +1,12 @@
 from flask import Flask, json, render_template_string
 from imagekitio import ImageKit
+from flask_cors import CORS 
 import os
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
-
+CORS(app)
 imagekit = ImageKit(
     private_key=os.environ['PRK'],
     public_key=os.environ['PBK'],
@@ -32,3 +33,8 @@ def getImages():
 
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
+
+@app.route('/auth')
+def _auth():
+    res = imagekit.get_authentication_parameters()
+    return res

@@ -3,7 +3,7 @@ import instagramLogo from '../images/instagram.png';
 import linkedinLogo from '../images/in.png';
 import githublogo from '../images/github.png';
 import clubLogo from '../images/logo.png';
-import { addEvent, getEvent, getMembers } from '../Firebase';
+import { getEvent, getMembers } from '../Firebase';
 import React, { useEffect, useState } from "react";
 
 import '../App.css';

@@ -1,13 +1,49 @@
+import { createRef } from "react";
+import { addEvent } from "../Firebase";
+import { IKContext, IKUpload } from 'imagekitio-react';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect } from "react";
 import '../App.css';
 import '../stylesheets/about.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom"
 import clubLogo from '../images/logo.png';
 
 
-function Dashboard() {
+export default function AddEvent() {
+    const title = createRef();
+    const link = createRef();
+    const date = createRef();
+    const desc = createRef();
+    const [image, setImage] = useState('')
+    const [buttonState, setButtonState] = useState(true)
+
+    const publicKey=process.env.REACT_APP_URL_PBK;
+    const urlEndpoint=process.env.REACT_APP_URL_ENDPOINT;
+    const authenticationEndpoint=process.env.REACT_APP_ENDPOINT+"/auth"
+    const onSuccess = (res) => {
+        console.log(res.url);
+        setImage(res.url);
+        setButtonState(false);
+    }
+    const onError = (err)=>{
+        console.log(err);
+    }
+
+    const add = ()=>{
+        var _date = new Date(date.current.value);
+        var _title = title.current.value;
+        var _link = link.current.value;
+        var _desc = desc.current.value;
+        
+        addEvent({
+            event: _title,
+            date: _date,
+            link: _link,
+            image: image,
+            desc: _desc
+        })
+    }
+
     const [view, setView] = useState({display: 'none', height: '0px'});
     const [path, setPath] = useState(
     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#FFFFFF80" class="bi bi-list" viewBox="0 0 16 16" >
@@ -47,7 +83,9 @@ function Dashboard() {
           });
           
     }
-    return <div>
+
+    return(
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white'}}>
         <div>
             <div className='navbar'>
                 <div className='navbar--container'>
@@ -88,39 +126,43 @@ function Dashboard() {
             </div>
             <div className='navbar-dummy'></div>
         </div>
-
-
-        {/* <> */}
-        <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: "center", marginLeft: 'auto', marginRight: 'auto'}}>
-            <div onClick={()=>{
-                window.location='/addevent'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Add Event
+        <div style={{marginLeft: 'auto', marginRight: 'auto',  marginTop: 50, marginBottom: 50, background: '#333', width: '450px', borderRadius: 10 }}>
+            <h1 style={{color: '#FFF', marginTop: 30, marginBottom: 20}}>Add Event</h1>
+            <div>
+                <p style={{textAlign: "start", paddingLeft: 20}}>Event Name</p>
+                <input ref={title} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Title" />  
             </div>
-            <div onClick={()=>{
-                window.location='/editevent'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Edit Event 
+            <div>
+                <p style={{textAlign: "start", paddingLeft: 20}}>Event Link</p>
+                <input ref={link}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Link" />
+            </div> 
+            <div>
+                <p style={{textAlign: "start", paddingLeft: 20}}>Event Date</p>
+                <input ref={date}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="date" placeholder="Event Link" />
+            </div> 
+            <div>
+                <p style={{textAlign: "start", paddingLeft: 20}}>Event Description</p>
+                <textarea ref={desc} style={{height: '200px', minWidth: '380px', maxWidth: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="date" placeholder="Event Description" />
             </div>
-            <div onClick={()=>{
-                window.location='/addmember'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Add Core Team Member
-            </div>
-            <div onClick={()=>{
-                window.location='/editmember'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Edit Core Team Member
-            </div>
-            <div style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Add Photo
-            </div>
-            <div style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                See Response
-            </div>
-
+            <div style={{textAlign: 'start', paddingLeft: 20}}>
+                <IKContext
+                    publicKey={publicKey} 
+                    urlEndpoint={urlEndpoint} 
+                    authenticationEndpoint={authenticationEndpoint} 
+                >
+                    Event Poster:
+                    <br/>
+                    <IKUpload
+                    style={{ marginTop: 10 }}
+                    fileName="test-upload.png"
+                    onError={onError}
+                    onSuccess={onSuccess}
+                    />
+                </IKContext>
+            </div> 
+            
+            <button disabled={buttonState} style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#222', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={add}>Add Event</button>
         </div>
     </div>
+    );
 }
-
-export default Dashboard;

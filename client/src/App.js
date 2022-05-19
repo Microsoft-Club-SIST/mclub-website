@@ -7,6 +7,10 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Dashboard from './routes/Dashboard';
 import Login from './routes/Login';
+import AddEvent from './routes/AddEvent';
+import EditEvent from './routes/EditEvent';
+import AddMember from './routes/AddMember';
+import EditMember from './routes/EditMember';
 
 function App() {
     return ( 
@@ -19,10 +23,13 @@ function App() {
                 <Route exact path = "/past-events" element = { <EventsPast /> }/>   
                 <Route exact path = "/dashboard" element = { <Dashboard /> }/>   
                 <Route exact path = "/login" element = { <Login /> }/>   
+                <Route exact path = "/addevent" element = { <AddEvent /> }/>   
+                <Route exact path = "/editevent" element = { <EditEvent /> }/>   
+                <Route exact path = "/addmember" element = { <AddMember /> }/>   
+                <Route exact path = "/editmember" element = { <EditMember /> }/>   
             </Routes>
         </div>
     );
 }
-
 
 export default App;
