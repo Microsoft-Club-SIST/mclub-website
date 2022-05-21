@@ -112,7 +112,9 @@ function Dashboard() {
             }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
                 Edit Core Team Member
             </div>
-            <div style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
+            <div onClick={()=>{
+                window.location='/addphoto'
+            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
                 Add Photo
             </div>
             <div style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>

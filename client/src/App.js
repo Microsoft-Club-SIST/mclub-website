@@ -11,6 +11,8 @@ import AddEvent from './routes/AddEvent';
 import EditEvent from './routes/EditEvent';
 import AddMember from './routes/AddMember';
 import EditMember from './routes/EditMember';
+import AddPhoto from './routes/AddPhoto';
+import Register from './routes/Register';
 
 function App() {
     return ( 
@@ -27,6 +29,8 @@ function App() {
                 <Route exact path = "/editevent" element = { <EditEvent /> }/>   
                 <Route exact path = "/addmember" element = { <AddMember /> }/>   
                 <Route exact path = "/editmember" element = { <EditMember /> }/>   
+                <Route exact path = "/addphoto" element = { <AddPhoto /> }/>   
+                <Route exact path = "/register" element = { <Register /> }/>   
             </Routes>
         </div>
     );

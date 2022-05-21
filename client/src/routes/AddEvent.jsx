@@ -14,6 +14,7 @@ export default function AddEvent() {
     const link = createRef();
     const date = createRef();
     const desc = createRef();
+    const [srcSet, setSecSet] = useState('https://ik.imagekit.io/mclubsist/image_K8j1sQhDc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1653135300309')
     const [image, setImage] = useState('')
     const [buttonState, setButtonState] = useState(true)
 
@@ -22,6 +23,7 @@ export default function AddEvent() {
     const authenticationEndpoint=process.env.REACT_APP_ENDPOINT+"/auth"
     const onSuccess = (res) => {
         console.log(res.url);
+        setSecSet('');
         setImage(res.url);
         setButtonState(false);
     }
@@ -152,6 +154,8 @@ export default function AddEvent() {
                 >
                     Event Poster:
                     <br/>
+                    <img src={image} alt={"NO PHOTO"} srcSet={srcSet} width="410px" />
+                    <br/>
                     <IKUpload
                     style={{ marginTop: 10 }}
                     fileName="test-upload.png"
@@ -161,7 +165,7 @@ export default function AddEvent() {
                 </IKContext>
             </div> 
             
-            <button disabled={buttonState} style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#222', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={add}>Add Event</button>
+            <button disabled={buttonState} className="black_button" onClick={add}>Add Event</button>
         </div>
     </div>
     );

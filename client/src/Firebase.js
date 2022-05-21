@@ -46,16 +46,26 @@ export const getUpEvent = async () => {
   const date = new Date();
   const q = query(eventRef, where("timestamp", ">", customTimeStamp(date)), orderBy("timestamp", "desc"));
   const querySnapshot = await getDocs(q);
-  const responseList = querySnapshot.docs.map(doc => doc.data());
+  const responseList = querySnapshot.docs.map(doc => { return {id: doc.id, ...doc.data()}});
   return responseList;
 }
 
+// export const getMembers = async () => {
+//   const eventRef = doc(collection(db, 'Members'), "list")
+//   console.log(eventRef);
+//   const querySnapshot = await getDocs(eventRef);
+//   console.log(querySnapshot);
+//   // const responseList = querySnapshot.docs.map(doc => { return doc.data()});
+//   // return responseList[0].data;
+// }
+
 export const getMembers = async () => {
-  const eventRef = collection(db, 'members')
-  const q = query(eventRef, orderBy("order"));
+  const eventRef = collection(db, 'Members')
+  const q = query(eventRef, );
   const querySnapshot = await getDocs(q);
-  const responseList = querySnapshot.docs.map(doc => { return {id: doc.id, ...doc.data()}});
-  return responseList;
+  const responseList = querySnapshot.docs.map(doc => { return doc.data()});
+  console.log(responseList[0]);
+  return responseList[0].data;
 }
 
 function customTimeStamp(date){
@@ -80,6 +90,34 @@ export const addEvent = async (obj) => {
     });
 }
 
+export const registerForEvent = async (obj) => {
+  const date = new Date();
+  const newEvent = doc(collection(db, "response"));  
+  console.log(obj.email);
+  console.log(obj.name);
+  console.log(obj.college);
+  console.log(obj.reg);
+  console.log(obj.roll);
+  console.log(obj.ph);
+  console.log(obj.dept);
+  console.log(obj.grad);
+  console.log(obj.comment);
+  console.log(obj.event);
+  await setDoc(newEvent, {
+    email: obj.email,
+    name: obj.name,
+    college: obj.college,
+    reg: obj.reg,
+    roll: obj.roll,
+    ph: obj.ph,
+    dept: obj.dept,
+    grad: obj.grad,
+    comment: obj.comment,
+    event: obj.event,
+    timestamp: customTimeStamp(date)
+  });
+}
+
 export const editEvent = async (obj) => {
   const newEvent = doc(collection(db, "event"), obj.id);  
   await setDoc(newEvent, {
@@ -97,35 +135,62 @@ export const deleteEvent = async (obj) => {
   await deleteDoc(newEvent);
 }
 
-export const addMember = async (obj) => {
-  const newEvent = doc(collection(db, "members"));  
-  await setDoc(newEvent, {
-    batch: obj.batch,
-    dept: obj.dept,
-    name: obj.name,
-    photo: obj.image,
-    order: +obj.order,
-    priority: +obj.priority,
-    role: obj.role,
+
+
+export const addMembers = async (obj) => {
+  getMembers().then( async res => 
+    {
+      const newEvent = doc(collection(db, "Members"), "list");  
+      res[res.length] =  {
+        batch: obj.batch,
+        dept: obj.dept,
+        name: obj.name,
+        photo: obj.image,
+        priority: +obj.priority,
+        role: obj.role,
+      }
+      console.log(res);
+      await setDoc(newEvent, {data: res})
+  }
+  ).then((res)=>{
+    window.location='/dashboard'
   });
 }
 
 export const editMember = async (obj) => {
-const newEvent = doc(collection(db, "members"), obj.id);  
-await setDoc(newEvent, {
-  batch: obj.batch,
-  dept: obj.dept,
-  name: obj.name,
-  photo: obj.image,
-  order: +obj.order,
-  priority: +obj.priority,
-  role: obj.role,
-});
-console.log(newEvent);
+  getMembers().then( async res => 
+    {
+      const newEvent = doc(collection(db, "Members"), "list");  
+      res[+obj.id] =  {
+        batch: obj.batch,
+        dept: obj.dept,
+        name: obj.name,
+        photo: obj.image,
+        priority: +obj.priority,
+        role: obj.role,
+      }
+      console.log(res);
+      await setDoc(newEvent, {data: res}
+    )
+  }
+  ).then((res)=>{
+    window.location='/dashboard'
+  });
 }
 
 
 export const deleteMember = async (obj) => {
-const newEvent = doc(collection(db, "members"), obj.id);  
-await deleteDoc(newEvent);
+  getMembers().then( async res => 
+    {
+      const newEvent = doc(collection(db, "Members"), "list");  
+      res =  [...res.slice(0, +obj.id), ...res.slice(+obj.id+1, res.length)]
+      console.log(res);
+      await setDoc(newEvent, {data: res}
+    )
+  }
+  ).then(
+    (res)=>{
+        window.location = '/dashboard'
+    }
+  );
 }

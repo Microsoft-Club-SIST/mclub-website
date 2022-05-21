@@ -54,3 +54,28 @@ body::-webkit-scrollbar-thumb:hover {
     transform: rotate(360deg);
   }
 }
+
+.black_button {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-Radius: 10px;
+  background: #222;
+  outline: 0;
+  border: 0;
+  padding: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  color: #FFF;
+}
+
+.black_button:hover{
+  color: #EEE;
+  background: #111;
+}
+
+.black_button:active{
+  color: #EEE;
+  background: #000;
+}
+

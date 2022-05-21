@@ -1,4 +1,4 @@
-import { addMember } from "../Firebase";
+import { addMembers } from "../Firebase";
 import { IKContext, IKUpload } from 'imagekitio-react';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useState, createRef, useEffect } from 'react';
@@ -9,18 +9,19 @@ export default function AddMember() {
     const batch = createRef();
     const dept = createRef();
     const name = createRef();
-    const order = createRef();
     const priority = createRef();
     const role = createRef();
     
     const [image, setImage] = useState('')
     const [buttonState, setButtonState] = useState(true)
+    const [srcSet, setSecSet] = useState('https://ik.imagekit.io/mclubsist/image_K8j1sQhDc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1653135300309')
 
     const publicKey=process.env.REACT_APP_URL_PBK;
     const urlEndpoint=process.env.REACT_APP_URL_ENDPOINT;
     const authenticationEndpoint=process.env.REACT_APP_ENDPOINT+"/auth"
     const onSuccess = (res) => {
         console.log(res.url);
+        setSecSet('');
         setImage(res.url);
         setButtonState(false);
     }
@@ -32,20 +33,20 @@ export default function AddMember() {
         var _batch = batch.current.value;
         var _dept = dept.current.value;
         var _name = name.current.value;
-        var _order = order.current.value;
         var _priority = priority.current.value;
         var _role = role.current.value;
         
-        addMember({
+        addMembers({
             batch: _batch,
             dept: _dept,
             name: _name,
             image: image,
-            order: _order,
             priority: _priority,
             role: _role
-        }).then(()=>{
-            window.location='/dashboard';
+        }).then((res)=>{
+            if(res==="completed"){
+                
+            }
         })
     }
 
@@ -142,11 +143,7 @@ export default function AddMember() {
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Department</p>
                 <input ref={dept}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Department" />
-            </div> 
-            <div>
-                <p style={{textAlign: "start", paddingLeft: 20}}>Order</p>
-                <input ref={order}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Position in list" />
-            </div> 
+            </div>  
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Priority</p>
                 <input ref={priority}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the priority level value" />
@@ -167,7 +164,8 @@ export default function AddMember() {
                 >
                     Photo (1:1)
                     <br/>
-                    <img src={image} alt={"media not found"} width="410px" />
+                    <br/>
+                    <img src={image} alt={"NO PHOTO"} srcSet={srcSet} width="410px" />
 
                     <IKUpload
                     style={{ marginTop: 10 }}
@@ -179,7 +177,7 @@ export default function AddMember() {
                 </IKContext>
             </div> 
             
-            <button disabled={buttonState} style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#222', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={add}>Add Event</button>
+            <button disabled={buttonState} className="black_button" onClick={add}>Add Member</button>
         </div>
     </div>
     );

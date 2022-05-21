@@ -11,13 +11,14 @@ export default function EditMember() {
     const batch = createRef();
     const dept = createRef();
     const name = createRef();
-    const order = createRef();
     const priority = createRef();
     const role = createRef();
     
     const [image, setImage] = useState('')
+    const [srcSet, setSecSet] = useState('https://ik.imagekit.io/mclubsist/image_K8j1sQhDc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1653135300309')
     
     const [ID, setID] = useState(0)
+    const [__key, setKey] = useState(0)
     const [members, setMembers] = useState([{name: "Loading..."}]);
     let option = createRef();
 
@@ -36,6 +37,7 @@ export default function EditMember() {
     const onSuccess = (res) => {
         console.log(res.url);
         setImage(res.url);
+        setSecSet('');
         setButtonState(false);
     }
     const onError = (err)=>{
@@ -46,24 +48,22 @@ export default function EditMember() {
         var _batch = batch.current.value;
         var _dept = dept.current.value;
         var _name = name.current.value;
-        var _order = order.current.value;
         var _priority = priority.current.value;
         var _role = role.current.value;
 
         editMember(
             {
-            batch: _batch,
-            id: ID,
-            dept: _dept,
-            name: _name,
-            image: image,
-            order: _order,
-            priority: _priority,
-            role: _role
+                batch: _batch,
+                id: __key,
+                dept: _dept,
+                name: _name,
+                image: image,
+                priority: _priority,
+                role: _role
             }
         ).then(
             ()=>{
-                window.location = '/dashboard'
+                // window.location = '/dashboard'
             }
         )
     }
@@ -72,11 +72,7 @@ export default function EditMember() {
     const remove = ()=>{
         deleteMember(
             {
-                id: ID,
-            }
-        ).then(
-            ()=>{
-                window.location = '/dashboard'
+                id: __key,
             }
         )
         console.log(members)
@@ -125,10 +121,10 @@ export default function EditMember() {
     function update(){
         var key =  option.current.value;
         console.log(key);
+        setKey(key)
         batch.current.value = members[key].batch;
         dept.current.value = members[key].dept;
         name.current.value = members[key].name;
-        order.current.value = members[key].order;
         priority.current.value = members[key].priority;
         role.current.value = members[key].role;
         setID(members[key].id);
@@ -201,10 +197,11 @@ export default function EditMember() {
             </div> 
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Order</p>
-                <input ref={order}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Position in list" />
+                <input readonly="readonly"  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#222', outline: 0, border: 0, color: '#FFF'}} type="text" value={__key} placeholder="Position in list" />
             </div> 
             <div>
-                <p style={{textAlign: "start", paddingLeft: 20}}>Priority</p>
+                <p style={{textAlign: "start", paddingLeft: 20}}>Priority 
+                <p style={{color: "#999 "}}>(1 - President, 2 - Vice President, 3 - Cluster Coordinator, 4 - Lead, 5 - Core Team)</p></p>
                 <input ref={priority}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the priority level value" />
             </div>
             <div>
@@ -223,8 +220,8 @@ export default function EditMember() {
                 >
                     Photo (1:1)
                     <br/>
-                    <img src={image} alt={"media is not available found"} width="410px" />
-
+                    <br/>
+                    <img src={image} alt={"NO PHOTO"} srcSet={srcSet} width="410px" />
                     <IKUpload
                     style={{ marginTop: 10 }}
                     folder="Members"
@@ -236,7 +233,7 @@ export default function EditMember() {
             </div> 
             
             <div style={{display: "flex", justifyContent: 'space-around', marginTop: 15}}>
-                <button disabled={buttonState} style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#222', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={add}>Update</button>
+                <button disabled={buttonState} className="black_button" onClick={add}>Update</button>
                 <button style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#F44', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={remove}>Delete</button>
             </div>
         </div>
