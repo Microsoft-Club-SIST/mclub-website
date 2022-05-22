@@ -79,3 +79,21 @@ body::-webkit-scrollbar-thumb:hover {
   background: #000;
 }
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 0px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #121212;
+}
+tr:nth-child(even) {
+  background-color: #222;
+}

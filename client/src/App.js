@@ -13,6 +13,7 @@ import AddMember from './routes/AddMember';
 import EditMember from './routes/EditMember';
 import AddPhoto from './routes/AddPhoto';
 import Register from './routes/Register';
+import Response from './routes/Response';
 
 function App() {
     return ( 
@@ -31,6 +32,7 @@ function App() {
                 <Route exact path = "/editmember" element = { <EditMember /> }/>   
                 <Route exact path = "/addphoto" element = { <AddPhoto /> }/>   
                 <Route exact path = "/register" element = { <Register /> }/>   
+                <Route exact path = "/response" element = { <Response /> }/>   
             </Routes>
         </div>
     );

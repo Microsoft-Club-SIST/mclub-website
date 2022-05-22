@@ -75,7 +75,7 @@ function Events() {
                   </p>
                 </div>
                 {
-                    (_date < _.timestamp) && <button className="event-card-registerbutton" onClick={()=> window.open(_.link, "_blank")}>Register</button>
+                    (_date < _.timestamp) && <button className="event-card-registerbutton" onClick={()=> {window.location = 'register'}}>Register</button>
                 }
                 {
                     (_date > _.timestamp) && <button className="event-card-registerbutton" onClick={()=> window.open(_.link, "_blank")}>View Recorded Session</button>

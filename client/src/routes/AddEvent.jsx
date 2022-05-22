@@ -31,7 +31,8 @@ export default function AddEvent() {
         console.log(err);
     }
 
-    const add = ()=>{
+    const add = (e)=>{
+        e.preventDefault();
         var _date = new Date(date.current.value);
         var _title = title.current.value;
         var _link = link.current.value;
@@ -130,17 +131,18 @@ export default function AddEvent() {
         </div>
         <div style={{marginLeft: 'auto', marginRight: 'auto',  marginTop: 50, marginBottom: 50, background: '#333', width: '450px', borderRadius: 10 }}>
             <h1 style={{color: '#FFF', marginTop: 30, marginBottom: 20}}>Add Event</h1>
+            <form onSubmit={add}>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Event Name</p>
-                <input ref={title} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Title" />  
+                <input required ref={title} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Title" />  
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Event Link</p>
-                <input ref={link}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Link" />
+                <input required ref={link}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="url" placeholder="Event Link" />
             </div> 
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Event Date</p>
-                <input ref={date}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="date" placeholder="Event Link" />
+                <input required ref={date}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="date" placeholder="Event Link" />
             </div> 
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Event Description</p>
@@ -157,6 +159,7 @@ export default function AddEvent() {
                     <img src={image} alt={"NO PHOTO"} srcSet={srcSet} width="410px" />
                     <br/>
                     <IKUpload
+                    required
                     style={{ marginTop: 10 }}
                     fileName="test-upload.png"
                     onError={onError}
@@ -165,7 +168,8 @@ export default function AddEvent() {
                 </IKContext>
             </div> 
             
-            <button disabled={buttonState} className="black_button" onClick={add}>Add Event</button>
+            <button className="black_button">Add Event</button>
+            </form>
         </div>
     </div>
     );

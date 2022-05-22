@@ -39,7 +39,8 @@ export default function EditEvent() {
         console.log(err);
     }
 
-    const add = ()=>{
+    const add = (e)=>{
+        e.preventDefault();
         var _date = new Date(date.current.value);
         var _title = title.current.value;
         var _link = link.current.value;
@@ -63,17 +64,22 @@ export default function EditEvent() {
     }
 
 
-    const remove = ()=>{
-        deleteEvent(
-            {
-                id: ID,
-            }
-        ).then(
-            ()=>{
-                window.location = '/dashboard'
-            }
-        )
-        console.log(events)
+    const remove = () =>{
+        if(window.confirm("Press OK to delete the event")){
+            deleteEvent(
+                {
+                    id: ID,
+                }
+            ).then(
+                ()=>{
+                    window.location = '/dashboard'
+                }
+            )    
+        }
+        else{
+            console.log("else");
+        }
+        // console.log(events)
     }
 
     function update(){
@@ -84,6 +90,7 @@ export default function EditEvent() {
         desc.current.value = events[key].desc;
         date.current.value = events[key].timestamp.toString().slice(0, 4)+'-'+events[key].timestamp.toString().slice(4, 6)+'-'+events[key].timestamp.toString().slice(6, 8);
         setID(events[key].id);
+        events[key].image && setSecSet('');
         setImage(events[key].image);
     }  
 
@@ -173,11 +180,12 @@ export default function EditEvent() {
 
         <div style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 60, marginBottom: 50, paddingBottom: 20, background: '#333', width: '450px', borderRadius: 10 }}>
             <h1 style={{color: '#FFF', marginTop: 50, marginBottom: 20}}>Edit Event</h1>
+            <form onSubmit={add}>
             <div style={{padding: 20}}>
-                <select defaultValue={-1} ref={option} onChange={update} 
+                <select defaultValue="" required ref={option} onChange={update}
                     style={{width: "100%",  padding: "10px", background: "#333", outline:0, color: '#FFF', paddingRight: "20px", borderRadius: 5 }}
                 >
-                    <option key={-1} value={-1} disabled>Select Option</option>
+                    <option key={-1} value="" disabled>Select Option</option>
                     {
                     events.map((value, key) =>
                     <option key={key} value={key}> {value.event} </option>
@@ -186,15 +194,15 @@ export default function EditEvent() {
             </div>
             <div style={{marginTop: 10}}>
                 <p style={{textAlign: "start", paddingLeft: 20, fontWeight: 'bold'}}>Event Name:</p>
-                <input ref={title} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Title" />  
+                <input required ref={title} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Title" />  
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20, fontWeight: 'bold'}}>Event Link:</p>
-                <input ref={link}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Link" />
+                <input required ref={link}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="url" placeholder="Event Link" />
             </div> 
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20, fontWeight: 'bold'}}>Event Date (MM/DD/YYYY)</p>
-                <input ref={date}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="date" placeholder="Event Link" />
+                <input required ref={date}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="date" placeholder="Event Link" />
             </div> 
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20, fontWeight: 'bold'}}>Event Description:</p>
@@ -211,17 +219,18 @@ export default function EditEvent() {
                     <br/>
                     <img src={image} alt={"NO PHOTO"} srcSet={srcSet} width="410px" />
                     <IKUpload
-                    style={{ marginTop: 10 }}
-                    fileName="test-upload.png"
-                    onError={onError}
-                    onSuccess={onSuccess}
+                        style={{ marginTop: 10 }}
+                        fileName="test-upload.png"
+                        onError={onError}
+                        onSuccess={onSuccess}
                     />
                 </IKContext>
             </div> 
             <div style={{display: "flex", justifyContent: 'space-around', marginTop: 15}}>
-                <button disabled={buttonState} className="black_button" onClick={add}>Update</button>
-                <button style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#F44', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={remove}>Delete</button>
+                <button type="submit" className="black_button">Update</button>
+                <div style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#F44', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={remove}>Delete</div>
             </div>
+            </form>
         </div>
     </div>
     );

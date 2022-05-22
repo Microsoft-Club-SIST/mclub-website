@@ -67,7 +67,7 @@ function About() {
                         <br />
                         {
                             (_date < responses[0].timestamp) && 
-                            <a href={responses[0].link} target="_blank" rel="noreferrer" className='RSVP'>RSVP HERE</a>
+                            <a href={'/register'} className='RSVP'>RSVP HERE</a>
                         }
                         {
                             (_date > responses[0].timestamp) &&
@@ -111,7 +111,7 @@ function About() {
                             members.map((_, i) => <div className='Profile' 
                             style={{
                                 backgroundColor: cardColors[_.priority-1], 
-                                color: (((_.priority == 1 || _.priority == 3|| _.priority == 4) ? 'black' : 'white'))}}>
+                                color: (((+_.priority === 1 || +_.priority === 3|| +_.priority === 4) ? 'black' : 'white'))}}>
                             <img src={_.photo} style={{objectFit: "cover"}} alt="profile" srcset="" />
                                 <h2 style={{marginTop: "10px", marginBottom: "10px"}}>{_.name}</h2>
                                 <b style={{opacity: "0.8", zIndex: 0}}>{_.role}</b>

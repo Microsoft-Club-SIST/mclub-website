@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, setDoc, doc, query, orderBy, where, deleteDoc } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, getDoc, setDoc, doc, query, orderBy, where, deleteDoc } from 'firebase/firestore/lite';
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -87,36 +87,23 @@ export const addEvent = async (obj) => {
       link: obj.link,
       image: obj.image,
       timestamp: customTimeStamp(obj.date),
+    }).then((res)=>{
+      window.location='/dashboard'
     });
 }
 
-export const registerForEvent = async (obj) => {
-  const date = new Date();
-  const newEvent = doc(collection(db, "response"));  
-  console.log(obj.email);
-  console.log(obj.name);
-  console.log(obj.college);
-  console.log(obj.reg);
-  console.log(obj.roll);
-  console.log(obj.ph);
-  console.log(obj.dept);
-  console.log(obj.grad);
-  console.log(obj.comment);
-  console.log(obj.event);
-  await setDoc(newEvent, {
-    email: obj.email,
-    name: obj.name,
-    college: obj.college,
-    reg: obj.reg,
-    roll: obj.roll,
-    ph: obj.ph,
-    dept: obj.dept,
-    grad: obj.grad,
-    comment: obj.comment,
-    event: obj.event,
-    timestamp: customTimeStamp(date)
-  });
+export const getResponse = async (obj) => {
+  const eventRef = doc(collection(db, 'response'), obj)
+  const querySnapshot = await getDoc(eventRef);
+  if (querySnapshot.exists()) {
+    return querySnapshot.data().data;
+  } else {
+    return [];
+  }
 }
+
+
+
 
 export const editEvent = async (obj) => {
   const newEvent = doc(collection(db, "event"), obj.id);  
@@ -126,16 +113,36 @@ export const editEvent = async (obj) => {
     link: obj.link,
     image: obj.image,
     timestamp: customTimeStamp(obj.date),
+  }).then((res)=>{
+    window.location='/dashboard'
   });
-  console.log(newEvent);
 }
 
 export const deleteEvent = async (obj) => {
   const newEvent = doc(collection(db, "event"), obj.id);  
-  await deleteDoc(newEvent);
+  await deleteDoc(newEvent).then((res)=>{
+    window.location='/dashboard'
+  });
 }
 
-
+export const registerForEvent = async (obj) => {
+  getResponse(obj.event).then(async (res)=>{
+    const newEvent = doc(collection(db, "response"), obj.event);  
+    const date = new Date();
+    await setDoc(newEvent, {data: [...res, {
+      email: obj.email,
+      name: obj.name,
+      college: obj.college,
+      reg: obj.reg,
+      roll: obj.roll,
+      ph: obj.ph,
+      dept: obj.dept,
+      grad: obj.grad,
+      comment: obj.comment,
+      timestamp: customTimeStamp(date)
+    }]});
+  })
+}
 
 export const addMembers = async (obj) => {
   getMembers().then( async res => 

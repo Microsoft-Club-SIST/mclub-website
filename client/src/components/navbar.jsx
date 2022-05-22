@@ -75,7 +75,9 @@ function NavBar(props){
                                 {(props.page === 'Gallery') && <div className='underline'></div>}
                                 {(props.page !== 'Gallery') && <div className='underline hover-show'></div>}
                             </li>
-                            <li className='register'>Register</li>
+                            <li onClick={()=>{
+                                window.location='/register'
+                            }}  className='register'>Register</li>
                         </ul>
                     </div>
                     <div className='navbar--right--mob'>

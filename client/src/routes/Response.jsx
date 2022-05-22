@@ -1,13 +1,40 @@
+import { createRef } from "react";
+import { deleteEvent, editEvent, getEvent, getResponse } from "../Firebase";
+import { IKContext, IKUpload } from 'imagekitio-react';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect } from "react";
 import '../App.css';
-import '../stylesheets/about.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom"
 import clubLogo from '../images/logo.png';
 
+export default function Response() {
+    const title = createRef();
+    const link = createRef();
+    const date = createRef();
+    const desc = createRef();
+    const [response, setResponse] = useState([])
+    const [ID, setID] = useState(0)
+    const [events, setEvents] = useState([{event: "Loading..."}]);
+    let option = createRef();
+    const [srcSet, setSecSet] = useState('https://ik.imagekit.io/mclubsist/image_K8j1sQhDc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1653135300309')
 
-function Dashboard() {
+    const [buttonState, setButtonState] = useState(true)
+    const publicKey=process.env.REACT_APP_URL_PBK;
+    const urlEndpoint=process.env.REACT_APP_URL_ENDPOINT;
+    const authenticationEndpoint=process.env.REACT_APP_ENDPOINT+"/auth";
+    
+    useEffect(() => {
+        getEvent().then(data => {
+            setEvents(data);
+        });
+      }, []);
+
+    function update(){
+        var key =  option.current.value;
+        title.current.value = events[key].event
+        getResponse(events[key].id).then(res => { console.log(res); setResponse(res) })
+    }  
+
     const [view, setView] = useState({display: 'none', height: '0px'});
     const [path, setPath] = useState(
     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#FFFFFF80" class="bi bi-list" viewBox="0 0 16 16" >
@@ -47,7 +74,9 @@ function Dashboard() {
           });
           
     }
-    return <div>
+
+    return(
+        <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh', color: 'white'}}>
         <div>
             <div className='navbar'>
                 <div className='navbar--container'>
@@ -90,41 +119,55 @@ function Dashboard() {
         </div>
 
 
-        {/* <> */}
-        <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: "center", marginLeft: 'auto', marginRight: 'auto'}}>
-            <div onClick={()=>{
-                window.location='/addevent'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Add Event
+        <div style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 60, marginBottom: 50, paddingBottom: 20, background: '#333', width: '450px', borderRadius: 10 }}>
+            <h1 style={{color: '#FFF', marginTop: 50, marginBottom: 20}}>Responses</h1>
+            <div style={{padding: 20}}>
+                <select defaultValue={-1} ref={option} onChange={update} 
+                    style={{width: "100%",  padding: "10px", background: "#333", outline:0, color: '#FFF', paddingRight: "20px", borderRadius: 5 }}
+                >
+                    <option key={-1} value={-1} disabled>Select Option</option>
+                    {
+                    events.map((value, key) =>
+                    <option key={key} value={key}> {value.event} </option>
+                    )}
+                </select>
             </div>
-            <div onClick={()=>{
-                window.location='/editevent'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Edit Event 
+            <div style={{marginTop: 10}}>
+                <p style={{textAlign: "start", paddingLeft: 20, fontWeight: 'bold'}}>Event Name:</p>
+                <input ref={title} readOnly="readonly" style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Title" />  
             </div>
-            <div onClick={()=>{
-                window.location='/addmember'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Add Core Team Member
-            </div>
-            <div onClick={()=>{
-                window.location='/editmember'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Edit Core Team Member
-            </div>
-            <div onClick={()=>{
-                window.location='/addphoto'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                Add Photo
-            </div>
-            <div onClick={()=>{
-                window.location='/response'
-            }} style={{background: '#444', width: '200px', height: '100px', color: 'white', margin: 60, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '24px', borderRadius: '10px', cursor: "pointer"}}>
-                See Response
-            </div>
+        </div>
+        <div>
+        <table>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>College</th>
+                <th>Register</th>
+                <th>Roll N0.</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Grad</th>
+                <th>Comment</th>
+            </tr>
+            {response.map((obj)=>{
+                return <tr>
+                    <td>{obj.email}</td>
+                    <td>{obj.name}</td>
+                    <td>{obj.college}</td>
+                    <td>{obj.reg}</td>
+                    <td>{obj.roll}</td>
+                    <td>{obj.ph}</td>
+                    <td>{obj.dept}</td>
+                    <td>{obj.grad}</td>
+                    <td>{obj.comment}</td>
+                </tr>
+            }
+            )
+            }
+        </table>
 
         </div>
     </div>
+    );
 }
-
-export default Dashboard;

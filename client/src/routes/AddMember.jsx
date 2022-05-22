@@ -29,7 +29,8 @@ export default function AddMember() {
         console.log(err);
     }
 
-    const add = ()=>{
+    const add = (e)=>{
+        e.preventDefault();
         var _batch = batch.current.value;
         var _dept = dept.current.value;
         var _name = name.current.value;
@@ -134,27 +135,27 @@ export default function AddMember() {
             <div className='navbar-dummy'></div>
         </div>
 
-        <div style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 50, marginBottom: 50,  background: '#333', width: '450px', borderRadius: 10 }}>
+        <form onSubmit={add} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 50, marginBottom: 50,  background: '#333', width: '450px', borderRadius: 10 }}>
             <h1 style={{color: '#FFF', marginTop: 30, marginBottom: 20}}>Add Member</h1>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Name</p>
-                <input ref={name} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Name" />  
+                <input required ref={name} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Name" />  
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Department</p>
-                <input ref={dept}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Department" />
+                <input required ref={dept}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Department" />
             </div>  
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Priority</p>
-                <input ref={priority}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the priority level value" />
+                <input required ref={priority}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the priority level value" />
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Batch</p>
-                <input ref={batch}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="2020-2024" />
+                <input required ref={batch}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="2020-2024" />
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Role</p>
-                <input ref={role}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the role" />
+                <input required ref={role}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the role" />
             </div>
             <div style={{textAlign: 'start', paddingLeft: 20}}>
                 <IKContext
@@ -168,6 +169,7 @@ export default function AddMember() {
                     <img src={image} alt={"NO PHOTO"} srcSet={srcSet} width="410px" />
 
                     <IKUpload
+                    required
                     style={{ marginTop: 10 }}
                     folder="Members"
                     fileName="test-upload.png"
@@ -177,8 +179,8 @@ export default function AddMember() {
                 </IKContext>
             </div> 
             
-            <button disabled={buttonState} className="black_button" onClick={add}>Add Member</button>
-        </div>
+            <button className="black_button">Add Member</button>
+        </form>
     </div>
     );
 }

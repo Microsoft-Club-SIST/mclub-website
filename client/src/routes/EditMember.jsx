@@ -44,7 +44,8 @@ export default function EditMember() {
         console.log(err);
     }
 
-    const add = ()=>{
+    const add = (e)=>{
+        e.preventDefault();
         var _batch = batch.current.value;
         var _dept = dept.current.value;
         var _name = name.current.value;
@@ -70,12 +71,13 @@ export default function EditMember() {
 
 
     const remove = ()=>{
-        deleteMember(
-            {
-                id: __key,
-            }
-        )
-        console.log(members)
+        if(window.confirm("Press OK to delete the member")){
+            deleteMember(
+                {
+                    id: __key,
+                }
+            )
+        }
     }
 
     const [view, setView] = useState({display: 'none', height: '0px'});
@@ -174,10 +176,10 @@ export default function EditMember() {
             <div className='navbar-dummy'></div>
         </div>
 
-        <div style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 60, marginBottom: 50, paddingBottom: 20, background: '#333', width: '450px', borderRadius: 10 }}>
+        <form onSubmit={add} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 60, marginBottom: 50, paddingBottom: 20, background: '#333', width: '450px', borderRadius: 10 }}>
             <h1 style={{color: '#FFF', marginTop: 50, marginBottom: 20}}>Edit Member</h1>
             <div style={{padding: 20}}>
-                <select defaultValue={-1} ref={option} onChange={update} 
+                <select required defaultValue={-1} ref={option} onChange={update} 
                     style={{width: "100%",  padding: "10px", background: "#333", outline:0, color: '#FFF', paddingRight: "20px", borderRadius: 5 }}
                 >
                     <option key={-1} value={-1} disabled>Select Option</option>
@@ -189,28 +191,28 @@ export default function EditMember() {
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Name</p>
-                <input ref={name} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Name" />  
+                <input required ref={name} style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Name" />  
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Department</p>
-                <input ref={dept}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Department" />
+                <input required ref={dept}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Department" />
             </div> 
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Order</p>
-                <input readonly="readonly"  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#222', outline: 0, border: 0, color: '#FFF'}} type="text" value={__key} placeholder="Position in list" />
+                <input required readonly="readonly"  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#222', outline: 0, border: 0, color: '#FFF'}} type="text" value={__key} placeholder="Position in list" />
             </div> 
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Priority 
                 <p style={{color: "#999 "}}>(1 - President, 2 - Vice President, 3 - Cluster Coordinator, 4 - Lead, 5 - Core Team)</p></p>
-                <input ref={priority}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the priority level value" />
+                <input required ref={priority}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the priority level value" />
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Batch</p>
-                <input ref={batch}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="2020-2024" />
+                <input required ref={batch}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="2020-2024" />
             </div>
             <div>
                 <p style={{textAlign: "start", paddingLeft: 20}}>Role</p>
-                <input ref={role}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the role" />
+                <input required ref={role}  style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Enter the role" />
             </div>
             <div style={{textAlign: 'start', paddingLeft: 20}}>
                 <IKContext
@@ -233,10 +235,10 @@ export default function EditMember() {
             </div> 
             
             <div style={{display: "flex", justifyContent: 'space-around', marginTop: 15}}>
-                <button disabled={buttonState} className="black_button" onClick={add}>Update</button>
-                <button style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#F44', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={remove}>Delete</button>
+                <button disabled={buttonState} className="black_button">Update</button>
+                <div style={{fontSize: 18, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#F44', outline: 0, border: 0, padding: 10, paddingLeft: 50, paddingRight: 50, color: '#EEE'}} onClick={remove}>Delete</div>
             </div>
-        </div>
+        </form>
     </div>
     );
 }
