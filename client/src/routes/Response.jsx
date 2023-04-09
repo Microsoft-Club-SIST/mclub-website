@@ -1,6 +1,5 @@
 import { createRef } from "react";
-import { deleteEvent, editEvent, getEvent, getResponse } from "../Firebase";
-import { IKContext, IKUpload } from 'imagekitio-react';
+import { getEvent, getResponse } from "../Firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import '../App.css';
 import React, { useState, useEffect } from 'react';
@@ -8,20 +7,10 @@ import {Link} from "react-router-dom"
 import clubLogo from '../images/logo.png';
 
 export default function Response() {
-    const title = createRef();
-    const link = createRef();
-    const date = createRef();
-    const desc = createRef();
     const [response, setResponse] = useState([])
-    const [ID, setID] = useState(0)
     const [events, setEvents] = useState([{event: "Loading..."}]);
+    let title = createRef();
     let option = createRef();
-    const [srcSet, setSecSet] = useState('https://ik.imagekit.io/mclubsist/image_K8j1sQhDc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1653135300309')
-
-    const [buttonState, setButtonState] = useState(true)
-    const publicKey=process.env.REACT_APP_URL_PBK;
-    const urlEndpoint=process.env.REACT_APP_URL_ENDPOINT;
-    const authenticationEndpoint=process.env.REACT_APP_ENDPOINT+"/auth";
     
     useEffect(() => {
         getEvent().then(data => {
@@ -70,7 +59,7 @@ export default function Response() {
         signOut(auth).then(() => {
             window.location = '/login'
           }).catch((error) => {
-            // An error happened.
+            window.alert("Something went wrong!")
           });
           
     }
@@ -137,14 +126,14 @@ export default function Response() {
                 <input ref={title} readOnly="readonly" style={{height: '30px', width: '380px', padding: 5, fontSize: 18, paddingLeft: 15, paddingRight: 15, marginTop: 10, marginBottom: 10, borderRadius: 10, background: '#555', outline: 0, border: 0, color: '#EEE'}} type="text" placeholder="Event Title" />  
             </div>
         </div>
-        <div>
+        <div className="table" style={{borderRadius: '10px', boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", overflow: 'scroll', height: '400px', width: '90vw', marginLeft: 'auto', marginRight: 'auto', marginBottom: 20, background: "#333"}}>
         <table>
             <tr>
                 <th>Email</th>
                 <th>Name</th>
                 <th>College</th>
                 <th>Register</th>
-                <th>Roll N0.</th>
+                <th>Roll Number</th>
                 <th>Phone</th>
                 <th>Department</th>
                 <th>Grad</th>
@@ -162,11 +151,9 @@ export default function Response() {
                     <td>{obj.grad}</td>
                     <td>{obj.comment}</td>
                 </tr>
-            }
-            )
+                })
             }
         </table>
-
         </div>
     </div>
     );

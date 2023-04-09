@@ -1,4 +1,3 @@
-import { AuthErrorCodes } from "firebase/auth";
 import { createRef, useEffect, useState } from "react";
 import NavBar from "../components/navbar";
 import { getUpEvent, registerForEvent } from "../Firebase";
@@ -6,7 +5,7 @@ import { getUpEvent, registerForEvent } from "../Firebase";
 export default function Register() {
     const inputBox = {maxWidth: 600, marginTop: 30, marginBottom: 30, marginLeft: 'auto', marginRight: 'auto', textAlign: 'start', fontWeight: 500 };
     const input = {marginTop: 20, color: "#3a3a3a",marginBottom: 20, height: '30px', width: "100%", outline: 0, border: 0,  padding: 4, fontSize: 18, borderRadius: 5 }
-    const S = ()=>{
+    const Star = ()=>{
         return( 
             <span style={{color: "#FF4646"}}>*</span>
         );
@@ -24,6 +23,7 @@ export default function Register() {
     let comment = createRef();
     let event = createRef();
 
+    const date = new Date();;
     // email
     // name
     // college
@@ -61,7 +61,7 @@ export default function Register() {
             }
         )
         
-        console.log("submitted");
+        alert(`${name.current.value} submitted your data`);
     }
     return <div style={{color: '#FFF'}}>
         <NavBar/>
@@ -69,42 +69,54 @@ export default function Register() {
         <form onSubmit={submit}>
         <div style={{ marginLeft: 20, marginRight: 20}}>
             <div style={inputBox}>
-                <label>Email Address <S/></label>
+                <label>Email Address <Star/></label>
                 <br/>
                 <input style={input} ref={email} type="email" required></input>
             </div>
             <div style={inputBox}>
-                <label>Name <S/></label>
+                <label>Name <Star/></label>
                 <br/>
                 <input style={input} ref={name} type="text" required></input>
             </div>
             <div style={inputBox}>
-                <label>College <S/></label>
+                <label>College <Star/></label>
                 <br/>
                 <input style={input} ref={college} type="text" required></input>
             </div>
             <div style={inputBox}>
-                <label>Register Number <S/></label>
+                <label>Register Number <Star/></label>
                 <br/>
                 <input style={input} ref={reg} type="number" required></input>
             </div>
             <div style={inputBox}>
-                <label>Roll Number <S/></label>
+                <label>Roll Number <Star/></label>
                 <br/>
                 <input style={input} ref={roll} type="text" required></input>
             </div>
             <div style={inputBox}>
-                <label>Phone Number <S/></label>
+                <label>Phone Number <Star/></label>
                 <br/>
                 <input style={input} ref={ph} type="tel" required></input>
             </div>
             <div style={inputBox}>
-                <label>Department <S/></label>
+                <label>Department <Star/></label>
                 <br/>
-                <input style={input} ref={dept} type="text" required></input>
+                <select  required defaultValue="" ref={dept} style={{...input, height: 40, backgroundColor: "#FFF"}}>
+                    <option key={-1} value="" disabled>Select Option</option>
+                    <option key={1} value={"Computer Science and Engineering"}>Computer Science and Engineering</option>
+                    <option key={2} value={"Information Technology"}>Information Technology</option>
+                    <option key={3} value={"Electrical and Electronics"}>Electrical and Electronics</option>
+                    <option key={4} value={"Electronics and Communication"}>Electronics and Communication</option>
+                    <option key={5} value={"Mechatronics"}>Mechatronics</option>
+                    <option key={6} value={"Aeronautical"}>Aeronautical</option>
+                    <option key={7} value={"Biotechnology"}>Biotechnology</option>
+                    <option key={8} value={"Automobile"}>Automobile</option>
+                    <option key={9} value={"Medical"}>Medical</option>
+                    <option key={10} value={"Other"}>Other</option>
+                </select>
             </div>
             <div style={inputBox}>
-                <label>Event <S/></label>
+                <label>Event <Star/></label>
                 <br/>
                 <select  required defaultValue="" ref={event} style={{...input, height: 40, backgroundColor: "#FFF"}}>
                     <option key={-1} value="" disabled>Select Option</option>
@@ -115,9 +127,17 @@ export default function Register() {
                 </select>
             </div>
             <div style={inputBox}>
-                <label>Expected Graduation Year <S/></label>
+                <label>Expected Graduation Year <Star/></label>
                 <br/>
-                <input style={input} ref={grad} type="text" required></input>
+                <select  required defaultValue="" ref={grad} style={{...input, height: 40, backgroundColor: "#FFF"}}>
+                    <option key={-1} value="" disabled>Select Option</option>
+                    <option key={1} value={date.getFullYear()}>{date.getFullYear()}</option>
+                    <option key={1} value={date.getFullYear()+1}>{date.getFullYear()+1}</option>
+                    <option key={1} value={date.getFullYear()+2}>{date.getFullYear()+2}</option>
+                    <option key={1} value={date.getFullYear()+3}>{date.getFullYear()+3}</option>
+                    <option key={1} value={date.getFullYear()+4}>{date.getFullYear()+4}</option>
+                    <option key={1} value={"NA"}>Not Applicable</option>
+                </select>
             </div>
             <div style={inputBox}>
                 <label>Have you joined our Discord Server? (this will be used for getting the updates and staying in touch with us on a daily basis)</label>
@@ -126,7 +146,7 @@ export default function Register() {
                 Server Invite: <a style={{color: "#5865F2"}} href="https://bit.ly/mclub-s4">https://bit.ly/mclub-s4</a>
                 <br/>
                 <br/>
-                <input style={{input}} type="radio" value={"Yes"}></input> Yes
+                <input required style={{input}} type="checkbox"></input> Yes, I'm in discord server.
             </div>
             <div style={inputBox}>
                 <label>Comments</label>

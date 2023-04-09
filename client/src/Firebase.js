@@ -50,14 +50,6 @@ export const getUpEvent = async () => {
   return responseList;
 }
 
-// export const getMembers = async () => {
-//   const eventRef = doc(collection(db, 'Members'), "list")
-//   console.log(eventRef);
-//   const querySnapshot = await getDocs(eventRef);
-//   console.log(querySnapshot);
-//   // const responseList = querySnapshot.docs.map(doc => { return doc.data()});
-//   // return responseList[0].data;
-// }
 
 export const getMembers = async () => {
   const eventRef = collection(db, 'Members')
@@ -101,9 +93,6 @@ export const getResponse = async (obj) => {
     return [];
   }
 }
-
-
-
 
 export const editEvent = async (obj) => {
   const newEvent = doc(collection(db, "event"), obj.id);  
